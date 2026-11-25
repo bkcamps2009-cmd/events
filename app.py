@@ -2,13 +2,24 @@ import os
 from uuid import UUID
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from postgrest import APIError
 from supabase import Client, create_client
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
+
+
+@app.after_request
+def add_frontend_cors(response):
+    # Permit the optional standalone frontend dev server. The app itself uses
+    # no cookies or other credentialed browser requests.
+    response.headers.setdefault("Access-Control-Allow-Origin", "*")
+    response.headers.setdefault("Access-Control-Allow-Headers", "Content-Type")
+    response.headers.setdefault("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    return response
+
 
 supabase_url = os.environ.get("SUPABASE_URL")
 supabase_key = os.environ.get("SUPABASE_PUBLISHABLE_KEY")
@@ -39,6 +50,20 @@ def handle_database_error(error):
 
 @app.get("/")
 def index():
+    frontend_dir = os.path.join(os.path.dirname(__file__), "frontend")
+    return send_from_directory(frontend_dir, "index.html")
+
+
+@app.get("/<path:filename>")
+def frontend_asset(filename):
+    if filename not in {"styles.css", "app.js"}:
+        return json_error("Not found", 404)
+    frontend_dir = os.path.join(os.path.dirname(__file__), "frontend")
+    return send_from_directory(frontend_dir, filename)
+
+
+@app.get("/api")
+def api_index():
     return jsonify({
         "service": "events-api",
         "endpoints": [

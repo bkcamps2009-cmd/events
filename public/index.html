@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f8f9ff" />
+  <title>CampusPulse · Campus events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Mulish:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✳</span><span>Campus<span class="brand-light">Pulse</span></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav id="role-nav" aria-label="Workspace">
+        <button class="nav-item active" data-role="student"><span class="nav-icon">◉</span>Student</button>
+        <button class="nav-item" data-role="manager"><span class="nav-icon">▦</span>Event manager</button>
+        <button class="nav-item" data-role="authority"><span class="nav-icon">⌂</span>Authority</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="profile-avatar">CP</div><div><strong>Campus guest</strong><small id="profile-sub">Student workspace</small></div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div><span class="eyebrow">CAMPUS EVENTS</span><h1 id="page-title">Your campus, in the loop.</h1></div>
+        <div class="top-actions"><span id="connection" class="connection"><i></i>Connecting</span><button id="refresh" class="button button-quiet">↻ <span>Refresh</span></button></div>
+      </header>
+      <main>
+        <section class="welcome panel">
+          <div class="welcome-copy"><span class="eyebrow light">YOUR CAMPUS, YOUR CALENDAR</span><h2 id="welcome-title">Find your next thing.</h2><p id="welcome-copy">Discover what’s happening around campus and save your seat.</p></div>
+          <div class="welcome-decoration" aria-hidden="true"><span>✳</span><b>Make<br/>it count.</b></div>
+        </section>
+
+        <section class="identity-row panel" id="identity-row">
+          <div class="identity-icon">↗</div><div class="identity-text"><strong>Connect your student account</strong><span>Enter your user UUID to load registrations and reserve a place.</span></div>
+          <form id="identity-form"><label class="sr-only" for="user-id">User UUID</label><input id="user-id" name="user_id" placeholder="Your user UUID" autocomplete="off"/><button class="button button-dark" type="submit">Save ID</button></form>
+        </section>
+
+        <div id="notice" class="notice" role="status" hidden></div>
+        <section id="student-view" class="view">
+          <div class="stats-grid">
+            <article class="stat panel"><div class="stat-label">MY REGISTRATIONS <span class="stat-icon lilac">↗</span></div><strong id="registration-count">—</strong><small>Events you’ve joined</small></article>
+            <article class="stat panel"><div class="stat-label">UPCOMING EVENTS <span class="stat-icon mint">✳</span></div><strong id="event-count">—</strong><small>Open to your campus</small></article>
+            <article class="stat panel"><div class="stat-label">NEXT ON YOUR LIST <span class="stat-icon peach">⌁</span></div><strong id="next-event" class="stat-next">—</strong><small id="next-date">Your next registered event</small></article>
+          </div>
+          <section class="section-block" id="my-events-section"><div class="section-heading"><div><span class="eyebrow">YOUR PLANS</span><h2>My registrations</h2></div><span class="section-note">Saved to your account</span></div><div id="my-events" class="registration-list"></div></section>
+          <section class="section-block"><div class="section-heading"><div><span class="eyebrow">OUT THERE</span><h2>Explore events</h2></div><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search campus events" aria-label="Search events"/></label></div><div id="events" class="event-grid"></div></section>
+        </section>
+
+        <section id="manager-view" class="view" hidden>
+          <div class="stats-grid"><article class="stat panel"><div class="stat-label">EVENTS IN FEED <span class="stat-icon lilac">▦</span></div><strong id="manager-event-count">—</strong><small>Available through the events API</small></article><article class="stat panel"><div class="stat-label">REGISTRATIONS LOADED <span class="stat-icon mint">↗</span></div><strong id="manager-reg-count">—</strong><small>For the selected event</small></article><article class="stat panel"><div class="stat-label">CURRENT WORKSPACE <span class="stat-icon peach">⌂</span></div><strong class="stat-next">Event manager</strong><small>Live event and attendee data</small></article></div>
+          <section class="section-block"><div class="section-heading"><div><span class="eyebrow">EVENT OPERATIONS</span><h2>Events & attendees</h2></div><select id="manager-event" aria-label="Choose an event"><option value="">Choose an event</option></select></div><div id="manager-events" class="table-wrap"></div><div class="section-heading subheading"><div><span class="eyebrow">REGISTRATION ROSTER</span><h2>Attendees</h2></div></div><div id="attendees" class="table-wrap"><div class="empty">Choose an event to load its attendee list.</div></div></section>
+          <div class="info-callout">Event creation, editing, check-in, and attendee search need backend endpoints that are not currently available.</div>
+        </section>
+
+        <section id="authority-view" class="view" hidden>
+          <div class="stats-grid"><article class="stat panel"><div class="stat-label">CAMPUS EVENTS <span class="stat-icon lilac">▦</span></div><strong id="authority-event-count">—</strong><small>Published event records</small></article><article class="stat panel"><div class="stat-label">EVENT CAPACITY <span class="stat-icon mint">⌁</span></div><strong id="capacity-total">—</strong><small>Combined, where capacity is set</small></article><article class="stat panel"><div class="stat-label">APPROVALS <span class="stat-icon peach">✓</span></div><strong>—</strong><small>No approval data in this API</small></article></div>
+          <section class="section-block"><div class="section-heading"><div><span class="eyebrow">CAMPUS OVERVIEW</span><h2>Published events</h2></div><button class="button button-quiet" id="export-events">↓ Export CSV</button></div><div id="authority-events" class="table-wrap"></div></section>
+          <div class="info-callout">Approval queue, budget, and venue schedule require backend data and actions that are not currently available.</div>
+        </section>
+        <footer class="footer"><span>CampusPulse</span><span>Campus events, all in one place.</span></footer>
+      </main>
+    </div>
+  </div>
+  <dialog id="event-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button><span class="eyebrow">EVENT DETAILS</span><h2 id="dialog-title"></h2><div id="dialog-meta" class="dialog-meta"></div><p id="dialog-description"></p><button class="button button-dark" id="dialog-register" value="register">Reserve my seat</button></form></dialog>
+  <script src="./app.js"></script>
+</body>
+</html>

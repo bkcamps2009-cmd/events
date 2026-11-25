@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Manager Dashboard — CampusPulse</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'success': '#15803D',
+        'on-success': '#FFFFFF',
+        'success-container': '#DCFCE7',
+        'on-success-container': '#14532D',
+        'warning': '#B45309',
+        'on-warning': '#FFFFFF',
+        'warning-container': '#FEF3C7',
+        'on-warning-container': '#78350F',
+        'light-primary': '#131B2E',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#283044',
+        'light-on-primary-container': '#DAE2FD',
+        'light-secondary': '#006781',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#DEF4FF',
+        'light-on-secondary-container': '#003544',
+        'light-tertiary': '#233144',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#D5E3FD',
+        'light-on-tertiary-container': '#0D1C2F',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#410002',
+        'light-background': '#F8F9FF',
+        'light-on-background': '#0B1C30',
+        'light-surface': '#F8F9FF',
+        'light-surface-dim': '#CBDBF5',
+        'light-surface-bright': '#F8F9FF',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#EFF4FF',
+        'light-surface-container': '#E5EEFF',
+        'light-surface-container-high': '#DCE9FF',
+        'light-surface-container-highest': '#D3E4FE',
+        'light-on-surface': '#0B1C30',
+        'light-surface-variant': '#E2E2E9',
+        'light-on-surface-variant': '#45464D',
+        'light-outline': '#76777D',
+        'light-outline-variant': '#C6C6CD',
+        'light-inverse-surface': '#213145',
+        'light-inverse-on-surface': '#EAF1FF',
+        'light-inverse-primary': '#BEC6E0',
+        'dark-primary': '#BEC6E0',
+        'dark-on-primary': '#283044',
+        'dark-primary-container': '#0F172A',
+        'dark-on-primary-container': '#DAE2FD',
+        'dark-secondary': '#81D1F0',
+        'dark-on-secondary': '#003544',
+        'dark-secondary-container': '#004D62',
+        'dark-on-secondary-container': '#B9EAFF',
+        'dark-tertiary': '#B9C7E0',
+        'dark-on-tertiary': '#233144',
+        'dark-tertiary-container': '#0D1C2F',
+        'dark-on-tertiary-container': '#D5E3FD',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#031427',
+        'dark-on-background': '#D3E4FE',
+        'dark-surface': '#031427',
+        'dark-surface-dim': '#031427',
+        'dark-surface-bright': '#2A3A4F',
+        'dark-surface-container-lowest': '#000F21',
+        'dark-surface-container-low': '#0B1C30',
+        'dark-surface-container': '#102034',
+        'dark-surface-container-high': '#1B2B3F',
+        'dark-surface-container-highest': '#26364A',
+        'dark-on-surface': '#D3E4FE',
+        'dark-surface-variant': '#45464D',
+        'dark-on-surface-variant': '#C6C6CD',
+        'dark-outline': '#909097',
+        'dark-outline-variant': '#45464D',
+        'dark-inverse-surface': '#D3E4FE',
+        'dark-inverse-on-surface': '#213145',
+        'dark-inverse-primary': '#565E74',
+      },
+      borderRadius: {
+        'sm': '4px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '40px',
+        'page-margin': '24px',
+      },
+      fontFamily: {
+        'display': ['"Mulish"', 'sans-serif'],
+        'headline': ['"Mulish"', 'sans-serif'],
+        'title': ['"Instrument Sans"', 'sans-serif'],
+        'body': ['"Instrument Sans"', 'sans-serif'],
+        'label': ['"Instrument Sans"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['40px', { lineHeight: '48px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['30px', { lineHeight: '36px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['28px', { lineHeight: '34px', letterSpacing: '-0.3px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '-0.1px', fontWeight: '700' }],
+        'title-md': ['16px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.1px', fontWeight: '600' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '600' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.25px', fontWeight: '500' }],
+        'mono-md': ['13px', { lineHeight: '18px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '200ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Mulish:wght@600;700;800&amp;family=Source+Code+Pro:wght@500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface text-light-on-surface font-body antialiased">
+  <div class="min-h-[1024px] flex flex-col lg:flex-row" data-stitch-vh="min-h-[1024px]===min-h-screen">
+    <!-- Left Sidebar -->
+    <aside class="w-full lg:w-60 shrink-0 bg-light-surface-container-low border-b lg:border-b-0 lg:border-r border-light-outline-variant flex flex-col justify-between lg:min-h-[1024px]" data-stitch-vh="lg:min-h-[1024px]===lg:min-h-screen">
+      <div class="p-gutter-lg flex flex-col gap-gutter-xl">
+        <div class="flex items-center gap-gutter-sm">
+          <div class="w-8 h-8 rounded-DEFAULT bg-light-primary text-light-on-primary flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">school</span>
+          </div>
+          <span data-design-text-token="title-md" class="font-headline text-title-md text-light-on-surface">CampusPulse</span>
+        </div>
+
+        <nav aria-label="Event manager navigation" class="flex flex-row lg:flex-col gap-gutter-xs overflow-x-auto">
+          <a href="#dashboard" class="flex items-center gap-gutter-sm px-3 py-2.5 rounded-DEFAULT bg-light-primary text-light-on-primary transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">dashboard</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg whitespace-nowrap">Dashboard</span>
+          </a>
+          <a href="#my-events" class="flex items-center gap-gutter-sm px-3 py-2.5 rounded-DEFAULT text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">event_note</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg whitespace-nowrap">My Events</span>
+          </a>
+          <a href="#checkin" class="flex items-center justify-between gap-gutter-sm px-3 py-2.5 rounded-DEFAULT text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface transition-colors duration-state-change">
+            <span class="flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-[18px]" aria-hidden="true">qr_code_scanner</span>
+              <span data-design-text-token="label-lg" class="font-label text-label-lg whitespace-nowrap">Check-In</span>
+            </span>
+            <span data-component-id="badge-numeric" data-component-type="badge" data-component-variant="numeric" role="status" class="inline-flex items-center justify-center min-w-6 h-6 px-2 rounded-full bg-light-primary text-light-on-primary tabular-nums">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">18</span>
+            </span>
+          </a>
+          <a href="#volunteers" class="flex items-center gap-gutter-sm px-3 py-2.5 rounded-DEFAULT text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">diversity_3</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg whitespace-nowrap">Volunteers</span>
+          </a>
+          <a href="#analytics" class="flex items-center gap-gutter-sm px-3 py-2.5 rounded-DEFAULT text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">insights</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg whitespace-nowrap">Feedback</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="hidden lg:flex items-center gap-gutter-sm p-gutter-md m-gutter-md rounded-md bg-light-surface-container-lowest border border-light-outline-variant">
+        <img src="https://lh3.googleusercontent.com/aida/ALJJyrDTl74Q-Vv6HOnDMB7sGHRHE8AJGY-t_qdPPVIJc52KMU3w5FNxxbcZrFYUtJ5qYKyRqzo3DG6Uv22PhCTUOm53eD6yog7ghciXPgxE4ZWDqcd5J82ArdBZckNEhOVu2WrhMhIQpuQlIyS9x4Ev3JASOaxSnlIRz4tyyuDTg4PNr8ye1bbkvpTD3RNcN4g8mxB30lGXOfoySTdaCIkGQ5KN1QXc8PLc7lxQ2YFdyOHurl53Z5euP7J4Kw" alt="Rohan Verma" class="w-9 h-9 rounded-full object-cover shrink-0">
+        <div class="min-w-0 flex-1">
+          <p data-design-text-token="label-lg" class="font-label text-label-lg text-light-on-surface truncate">Rohan Verma</p>
+          <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant truncate">Event Coordinator</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="sticky top-0 z-20 bg-light-surface border-b border-light-outline-variant px-gutter-xl py-3.5 flex flex-wrap items-center justify-between gap-gutter-md">
+        <h1 data-design-text-token="headline-md" class="font-headline text-headline-md text-light-on-surface">Event Manager Dashboard</h1>
+
+        <div class="flex items-center gap-gutter-sm flex-1 justify-end max-w-lg">
+          <form data-component-id="searchbar-standard" data-component-type="searchbar" data-component-variant="standard" role="search" class="relative flex items-center w-full max-w-xs">
+            <span class="material-symbols-outlined text-[18px] text-light-outline absolute left-3 pointer-events-none" aria-hidden="true">search</span>
+            <input id="manager-search" type="search" aria-label="Search attendees or pass ID" placeholder="Search attendee..." class="w-full pl-9 pr-gutter-md py-2 rounded-DEFAULT bg-light-surface-container-lowest border border-light-outline-variant text-body-md text-light-on-surface placeholder:text-light-outline focus:border-light-primary focus:ring-1 focus:ring-light-primary">
+          </form>
+
+          <button data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" type="button" class="inline-flex items-center justify-center gap-gutter-sm px-gutter-md py-2 rounded-DEFAULT bg-light-primary text-light-on-primary hover:bg-light-primary-container transition-colors duration-state-change cursor-pointer shrink-0">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">add_circle</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg whitespace-nowrap">Create event</span>
+          </button>
+
+          <button data-component-id="button-secondary" data-component-type="button" data-component-variant="secondary" type="button" class="inline-flex items-center justify-center gap-gutter-xs px-gutter-md py-2 rounded-DEFAULT bg-light-surface-container-lowest text-light-on-surface border border-light-outline-variant hover:bg-light-surface-container-low transition-colors duration-state-change cursor-pointer shrink-0">
+            <span data-design-text-token="label-lg" class="font-label text-label-lg whitespace-nowrap">Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="flex-1 p-gutter-xl max-w-[1360px] w-full mx-auto flex flex-col gap-section">
+        <!-- Minimal 3-Stat Row -->
+        <section aria-label="Event operations summary" class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg items-stretch">
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="bg-light-surface-container-lowest border border-light-outline-variant rounded-lg p-gutter-lg flex flex-col gap-1">
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Active events</span>
+            <span data-design-text-token="display-lg" class="font-display text-display-lg text-light-primary tabular-nums">3</span>
+            <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">1 live check-in</span>
+          </article>
+
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="bg-light-surface-container-lowest border border-light-outline-variant rounded-lg p-gutter-lg flex flex-col gap-1">
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Total registrations</span>
+            <span data-design-text-token="display-lg" class="font-display text-display-lg text-light-on-surface tabular-nums">642</span>
+            <span data-design-text-token="body-sm" class="font-body text-body-sm text-success">+48 today</span>
+          </article>
+
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="bg-light-surface-container-lowest border border-light-outline-variant rounded-lg p-gutter-lg flex flex-col gap-1">
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Attendee feedback</span>
+            <span data-design-text-token="display-lg" class="font-display text-display-lg text-light-secondary tabular-nums">4.8</span>
+            <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant tabular-nums">312 responses</span>
+          </article>
+        </section>
+
+        <!-- Managed Events -->
+        <section id="my-events" aria-labelledby="managed-events-heading" class="flex flex-col gap-gutter-md">
+          <h2 id="managed-events-heading" data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-on-surface">Managed events</h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg items-stretch">
+            <article data-component-id="card-action" data-component-type="card" data-component-variant="action" class="bg-light-surface-container-lowest border border-light-outline-variant rounded-lg p-gutter-lg flex flex-col justify-between gap-gutter-md h-full">
+              <div class="flex flex-col gap-gutter-sm">
+                <span data-design-text-token="label-sm" class="self-start px-2.5 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm whitespace-nowrap">Live check-in</span>
+                <h3 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Annual AI &amp; Robotics Summit</h3>
+                <div class="flex flex-col gap-1.5 pt-1">
+                  <div class="flex justify-between">
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Capacity</span>
+                    <span data-design-text-token="label-md" class="font-label text-label-md text-light-primary tabular-nums">220 / 250</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-light-surface-container-high overflow-hidden">
+                    <div class="h-full bg-light-primary rounded-full w-[88%]"></div>
+                  </div>
+                </div>
+              </div>
+              <footer class="pt-gutter-sm border-t border-light-outline-variant flex justify-end">
+                <button type="button" class="px-3 py-1.5 rounded-DEFAULT bg-light-primary text-light-on-primary hover:bg-light-primary-container font-label text-label-md whitespace-nowrap cursor-pointer">Open scanner</button>
+              </footer>
+            </article>
+
+            <article data-component-id="card-action" data-component-type="card" data-component-variant="action" class="bg-light-surface-container-lowest border border-light-outline-variant rounded-lg p-gutter-lg flex flex-col justify-between gap-gutter-md h-full">
+              <div class="flex flex-col gap-gutter-sm">
+                <span data-design-text-token="label-sm" class="self-start px-2.5 py-0.5 rounded-full bg-light-secondary-container text-light-on-secondary-container font-label text-label-sm whitespace-nowrap">Open</span>
+                <h3 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Design Systems Sprint</h3>
+                <div class="flex flex-col gap-1.5 pt-1">
+                  <div class="flex justify-between">
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Capacity</span>
+                    <span data-design-text-token="label-md" class="font-label text-label-md text-light-secondary tabular-nums">102 / 120</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-light-surface-container-high overflow-hidden">
+                    <div class="h-full bg-light-secondary rounded-full w-[85%]"></div>
+                  </div>
+                </div>
+              </div>
+              <footer class="pt-gutter-sm border-t border-light-outline-variant flex justify-end">
+                <button type="button" class="px-3 py-1.5 rounded-DEFAULT bg-light-surface-container-lowest border border-light-outline-variant text-light-on-surface hover:bg-light-surface-container-low font-label text-label-md whitespace-nowrap cursor-pointer">Manage roster</button>
+              </footer>
+            </article>
+
+            <article data-component-id="card-action" data-component-type="card" data-component-variant="action" class="bg-light-surface-container-lowest border border-light-outline-variant rounded-lg p-gutter-lg flex flex-col justify-between gap-gutter-md h-full">
+              <div class="flex flex-col gap-gutter-sm">
+                <span data-design-text-token="label-sm" class="self-start px-2.5 py-0.5 rounded-full bg-warning-container text-on-warning-container font-label text-label-sm whitespace-nowrap">Pending approval</span>
+                <h3 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Winter Acoustic Night</h3>
+                <div class="flex flex-col gap-1.5 pt-1">
+                  <div class="flex justify-between">
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Capacity</span>
+                    <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface tabular-nums">320 / 450</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-light-surface-container-high overflow-hidden">
+                    <div class="h-full bg-light-primary rounded-full w-[71%]"></div>
+                  </div>
+                </div>
+              </div>
+              <footer class="pt-gutter-sm border-t border-light-outline-variant flex justify-end">
+                <button type="button" class="px-3 py-1.5 rounded-DEFAULT bg-light-surface-container-lowest border border-light-outline-variant text-light-on-surface hover:bg-light-surface-container-low font-label text-label-md whitespace-nowrap cursor-pointer">Edit event</button>
+              </footer>
+            </article>
+          </div>
+        </section>
+
+        <!-- Live Check-In Roster -->
+        <section id="checkin" aria-labelledby="checkin-heading" class="flex flex-col gap-gutter-md">
+          <div class="flex items-center justify-between gap-gutter-md">
+            <h2 id="checkin-heading" data-design-text-token="headline-sm" class="font-headline text-headline-sm text-light-on-surface">Live check-in roster</h2>
+            <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">8 volunteers on duty</span>
+          </div>
+
+          <div data-component-id="table-interactive" data-component-type="table" data-component-variant="interactive" class="bg-light-surface-container-lowest border border-light-outline-variant rounded-lg overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead class="bg-light-surface-container-low border-b border-light-outline-variant">
+                <tr>
+                  <th scope="col" aria-sort="none" class="px-gutter-lg py-3.5 text-light-on-surface-variant">
+                    <span data-design-text-token="label-md" class="font-label text-label-md">Attendee</span>
+                  </th>
+                  <th scope="col" aria-sort="none" class="px-gutter-lg py-3.5 text-light-on-surface-variant">
+                    <span data-design-text-token="label-md" class="font-label text-label-md">Pass ID</span>
+                  </th>
+                  <th scope="col" aria-sort="none" class="px-gutter-lg py-3.5 text-light-on-surface-variant">
+                    <span data-design-text-token="label-md" class="font-label text-label-md">Status</span>
+                  </th>
+                  <th scope="col" class="px-gutter-lg py-3.5 text-right text-light-on-surface-variant">
+                    <span data-design-text-token="label-md" class="font-label text-label-md">Action</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-light-outline-variant">
+                <tr class="hover:bg-light-surface-container-low transition-colors duration-state-change">
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="label-lg" class="font-label text-label-lg text-light-on-surface">Aarav Mehta</span>
+                  </td>
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="mono-md" class="font-mono text-mono-md text-light-on-surface-variant tabular-nums whitespace-nowrap">CP-2026-8841</span>
+                  </td>
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="label-sm" class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-warning-container text-on-warning-container font-label text-label-sm whitespace-nowrap">Arriving</span>
+                  </td>
+                  <td class="px-gutter-lg py-4 text-right">
+                    <button type="button" class="px-3 py-1.5 rounded-DEFAULT bg-light-primary text-light-on-primary hover:bg-light-primary-container font-label text-label-md whitespace-nowrap cursor-pointer">Check in</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-light-surface-container-low transition-colors duration-state-change">
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="label-lg" class="font-label text-label-lg text-light-on-surface">Neha Kulkarni</span>
+                  </td>
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="mono-md" class="font-mono text-mono-md text-light-on-surface-variant tabular-nums whitespace-nowrap">CP-2026-8842</span>
+                  </td>
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="label-sm" class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-success-container text-on-success-container font-label text-label-sm whitespace-nowrap">Checked in</span>
+                  </td>
+                  <td class="px-gutter-lg py-4 text-right">
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant tabular-nums whitespace-nowrap">09:42 AM</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-light-surface-container-low transition-colors duration-state-change">
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="label-lg" class="font-label text-label-lg text-light-on-surface">Siddharth Nair</span>
+                  </td>
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="mono-md" class="font-mono text-mono-md text-light-on-surface-variant tabular-nums whitespace-nowrap">CP-2026-8849</span>
+                  </td>
+                  <td class="px-gutter-lg py-4">
+                    <span data-design-text-token="label-sm" class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-warning-container text-on-warning-container font-label text-label-sm whitespace-nowrap">Arriving</span>
+                  </td>
+                  <td class="px-gutter-lg py-4 text-right">
+                    <button type="button" class="px-3 py-1.5 rounded-DEFAULT bg-light-primary text-light-on-primary hover:bg-light-primary-container font-label text-label-md whitespace-nowrap cursor-pointer">Check in</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+
+</body></html>
