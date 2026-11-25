@@ -8,5 +8,5 @@ SOURCE = ROOT / "frontend"
 PUBLIC = ROOT / "public"
 
 PUBLIC.mkdir(exist_ok=True)
-for filename in ("index.html", "styles.css", "app.js"):
+for filename in ("index.html", "styles.css", "app.js", "config.js"):
     shutil.copy2(SOURCE / filename, PUBLIC / filename)

@@ -56,7 +56,7 @@ def index():
 
 @app.get("/<path:filename>")
 def frontend_asset(filename):
-    if filename not in {"styles.css", "app.js"}:
+    if filename not in {"styles.css", "app.js", "config.js"}:
         return json_error("Not found", 404)
     frontend_dir = os.path.join(os.path.dirname(__file__), "frontend")
     return send_from_directory(frontend_dir, filename)
@@ -74,6 +74,12 @@ def api_index():
             "GET /api/events/<id>/registrations",
         ],
     })
+
+
+@app.get("/healthz")
+def health_check():
+    """Return a simple liveness response for Render's deploy health check."""
+    return jsonify({"status": "ok"})
 
 
 @app.get("/api/events")

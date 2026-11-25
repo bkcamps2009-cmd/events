@@ -1,5 +1,5 @@
 const localDevHost = ['localhost','127.0.0.1'].includes(location.hostname);
-const API_BASE = (new URLSearchParams(location.search).get('api') || localStorage.getItem('campuspulse_api') || (localDevHost && location.port && location.port !== '5000' ? 'http://127.0.0.1:5000' : location.origin)).replace(/\/$/, '');
+const API_BASE = (new URLSearchParams(location.search).get('api') || localStorage.getItem('campuspulse_api') || window.CAMPUSPULSE_API_BASE || (localDevHost && location.port && location.port !== '5000' ? 'http://127.0.0.1:5000' : location.origin)).replace(/\/$/, '');
 const state = { events: [], registrations: [], attendees: [], role: 'student', busy: new Set() };
 const $ = (selector) => document.querySelector(selector);
 const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

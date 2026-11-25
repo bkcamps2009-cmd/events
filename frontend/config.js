@@ -1,0 +1,1 @@
+window.CAMPUSPULSE_API_BASE = "";
